@@ -15,7 +15,8 @@ class MySegmentTree:
             self.build(2 * node + 1, mid + 1, r)
             self.segment_tree[node] = self.operation(self.segment_tree[2 * node], self.segment_tree[2 * node + 1])
 
-    def operation(self, x, y): return x + y
+    def operation(self, x, y):
+        return x + y
 
     def query(self, l, r):
         return self.query_internal(1, 0, self.n - 1, l, r)
@@ -41,12 +42,13 @@ class MySegmentTree:
         if l <= tl and tr <= r:
             return self.segment_tree[node]
         tm = (tl + tr) // 2
-        return self.operation(self.query_internal(2 * node, tl, tm, l, r), self.query_internal(2 * node + 1, tm + 1, tr, l, r))
+        return self.operation(self.query_internal(2 * node, tl, tm, l, r),
+                              self.query_internal(2 * node + 1, tm + 1, tr, l, r))
 
 
 n, m = map(int, input().split())
 array = list(map(int, input().split()))
-segment_tree =MySegmentTree(array)
+segment_tree = MySegmentTree(array)
 
 for _ in range(m):
     q = list(map(int, input().split()))
