@@ -50,13 +50,14 @@ n = int(input())
 a = list(map(int, input().split()))
 
 compress = {value: idx for idx, value in enumerate(sorted(set(a)))}
-x = [MySegmentTree([0] * (n + 1)) for _ in range(3)]
+st_2 = MySegmentTree([0] * (n + 1))
+st_3 = MySegmentTree([0] * (n + 1))
 cnt = 0
 
 for e in a:
     i = compress[e]
-    x[1].update(i, 1)
-    x[2].update(i, x[1].query(i + 1, n))
-    cnt += x[2].query(i + 1, n)
+    st_2.update(i, 1)
+    st_3.update(i, st_2.query(i + 1, n))
+    cnt += st_3.query(i + 1, n)
 
 print(cnt)
