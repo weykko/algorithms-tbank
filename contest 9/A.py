@@ -22,10 +22,10 @@ class MySegmentTree:
 
         self.plus_tag[node] = 0
 
-    def range_set(self, ql, qr, v):
-        self.__range_set(1, 0, self.n - 1, ql, qr, v)
+    def range_plus(self, ql, qr, v):
+        self.__range_plus(1, 0, self.n - 1, ql, qr, v)
 
-    def __range_set(self, node, l, r, ql, qr, v):
+    def __range_plus(self, node, l, r, ql, qr, v):
         self.__push(node, l, r)
         if qr < l or r < ql:
             return
@@ -34,8 +34,8 @@ class MySegmentTree:
             self.__push(node, l, r)
         else:
             m = (l + r) // 2
-            self.__range_set(node * 2, l, m, ql, qr, v)
-            self.__range_set(node * 2 + 1, m + 1, r, ql, qr, v)
+            self.__range_plus(node * 2, l, m, ql, qr, v)
+            self.__range_plus(node * 2 + 1, m + 1, r, ql, qr, v)
             self.st[node] = self.__operation(self.st[node * 2], self.st[node * 2 + 1])
 
     def query(self, ql, qr):
@@ -60,6 +60,6 @@ for _ in range(m):
     if q[0] == '1':
         if q[3] == '0':
             continue
-        st.range_set(int(q[1]), int(q[2]) - 1, int(q[3]))
+        st.range_plus(int(q[1]), int(q[2]) - 1, int(q[3]))
     else:
         print(st.query(int(q[1]), int(q[2]) - 1))
