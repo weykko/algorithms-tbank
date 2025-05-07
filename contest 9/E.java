@@ -10,7 +10,6 @@ public class E {
 
     static class Line {
         Point s, e;
-        Line() {}
         Line(Point ss, Point ee) { s = ss; e = ee; }
     }
 
